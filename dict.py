@@ -1,14 +1,12 @@
 #!/usr/bin/env python3 
 # -*- coding: utf-8 -*-
 
-import requests,re
+import requests,re,sys
 
-word=input("Input the word, ENTER for exit: ")
-
-while(word!=''):
+def trans(word):
     url="http://dict.youdao.com/w/"+word+"/"
     html=requests.get(url).content.decode('utf-8')
-    print("Result is : ")
+    print("Result is : \n")
     # the word is English word
     if ord(word[0].lower()) in range(97,123):   
         result=re.findall(r'<li>(.*?)</li>',html)  
@@ -23,5 +21,11 @@ while(word!=''):
         for i in result:
             if ord(i[0].lower()) in range(97,123):   
                 print(i,end=';')
-    word=input("\nInput the word, ENTER for exit: ")
-    
+
+if len(sys.argv)==2:
+    trans(sys.argv[1])
+else:
+    word=input("Input the word, ENTER for exit: ")
+    while(word!=''):
+        trans(word)
+        word=input("\nInput the word, ENTER for exit: ")
