@@ -6,7 +6,7 @@ import requests,re,sys
 def trans(word):
     url="http://dict.youdao.com/w/"+word+"/"
     html=requests.get(url).content.decode('utf-8')
-    print("Result is : \n")
+    print("%s : \n" % word)
     # the word is English word
     if ord(word[0].lower()) in range(97,123):   
         result=re.findall(r'<li>(.*?)</li>',html)  
