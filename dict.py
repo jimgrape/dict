@@ -11,8 +11,10 @@ def trans(word):
     if ord(word[0].lower()) in range(97,123):   
         result=re.findall(r'<li>(.*?)</li>',html)  
         pron=re.findall(r'class="phonetic">(.*?)</span>',html)
-        if pron!=[]:
+        if len(pron)==2:
             print("英%s   美%s" % (pron[0],pron[1]))
+        elif len(pron)==1:
+            print("%s" % (pron[0]))
         for i in result:
             if i=='' or i[0]=='<':
                 break
